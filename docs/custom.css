@@ -22,7 +22,7 @@
 
 /* Download section styling */
 .download-section {
-  background: #f8f9fa;
+  background: #1e1e1e;
   padding: 20px;
   border-radius: 8px;
   margin: 20px 0;
@@ -107,7 +107,7 @@ pre {
 /* Highlight important notes */
 blockquote {
   border-left: 4px solid #667eea;
-  background: #f8f9fa;
+  background: #1e1e1e;
   padding: 10px 20px;
   margin: 20px 0;
   border-radius: 4px;
@@ -126,7 +126,7 @@ a:hover {
 
 /* Header improvements */
 h1, h2, h3, h4, h5, h6 {
-  color: #2c3e50;
+  color: #e8e8e8;
 }
 
 h1 {
@@ -154,7 +154,7 @@ table td {
 }
 
 table tr:hover {
-  background: #f8f9fa;
+  background: #2a2a2a;
 }
 
 /* Badge styling for file types */
