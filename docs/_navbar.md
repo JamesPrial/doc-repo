@@ -9,3 +9,4 @@
   - [Clone Repository](https://github.com/jamesprial/doc-repo)
 
 - [GitHub](https://github.com/jamesprial/doc-repo)
+- [🔗 Fetcher](https://jamesprial.github.io/fetcher/)

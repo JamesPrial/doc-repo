@@ -73,3 +73,6 @@
 - **Download**
   - [📦 Download Repository](https://github.com/jamesprial/doc-repo/archive/refs/heads/main.zip)
   - [View on GitHub](https://github.com/jamesprial/doc-repo)
+
+- **Related Projects**
+  - [🔗 Fetcher Actions](https://jamesprial.github.io/fetcher/)
