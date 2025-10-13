@@ -1,0 +1,43 @@
+name: Fetch and Convert Reddit API Documentation
+
+on:
+  schedule:
+    # Runs daily at 2:00 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  fetch-and-convert:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        run: |
+          pip install beautifulsoup4 html2text
+
+      - name: Fetch Reddit API documentation
+        run: |
+          curl https://www.reddit.com/dev/api -H "user-agent:u/ArtisticKey4324" > reddit-api.html
+
+      - name: Convert HTML to Markdown
+        run: |
+          python reddit/html_converter.py reddit-api.html --format markdown -o reddit-api.md
+
+      - name: Remove HTML file
+        run: |
+          rm reddit-api.html
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reddit-api.md
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: update Reddit API documentation (markdown)" && git push)
