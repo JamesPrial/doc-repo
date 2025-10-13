@@ -1,17 +1,24 @@
-# Claude Code Documentation Repository
+# Documentation Repository
 
-This repository automatically downloads and maintains the latest [Claude Code](https://claude.com/claude-code) documentation from Anthropic.
+This is my personal collection of documentation formatted in Markdown for easy reference and offline access.
 
-## What It Does
+## What This Repository Contains
 
-This project uses GitHub Actions to automatically fetch the latest Claude Code documentation from Anthropic's official documentation site on a daily schedule. The documentation is downloaded in Markdown format and stored in the `claude/docs/` directory.
+I maintain personal copies of various documentation sets, including:
+- **Claude Code**: Official documentation from Anthropic's [Claude Code](https://claude.com/claude-code)
+- **Reddit API**: Documentation for Reddit's API endpoints and functionality
 
-## How It Works
+All documentation is stored in Markdown format for easy reading, searching, and version control.
 
-1. **Automated Downloads**: A GitHub Actions workflow runs daily at 2 AM UTC (or can be triggered manually)
-2. **Documentation Extraction**: The workflow fetches all documentation pages from the Claude Code docs sitemap
-3. **Local Storage**: Documentation is saved as Markdown files in the `claude/docs/` directory
-4. **Version Control**: Changes are automatically committed and pushed to the repository
+## How I Keep It Updated
+
+I use **GitHub Actions** to automatically keep the documentation up to date:
+
+1. **Scheduled Updates**: A GitHub Actions workflow runs daily at 2 AM UTC to check for new documentation
+2. **Automatic Fetching**: The workflow downloads the latest documentation from official sources
+3. **Format Conversion**: Content is converted to clean Markdown format
+4. **Auto-commit**: Any changes are automatically committed and pushed to this repository
+5. **Manual Triggers**: I can also manually trigger updates from the Actions tab when needed
 
 ## Directory Structure
 
