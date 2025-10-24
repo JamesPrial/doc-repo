@@ -173,12 +173,10 @@ Want to join? [Log in](https://www.reddit.com/login) or [sign up](https://www.re
       * /live/_thread_ /discussions
       * /live/_thread_ /updates/_update_id_
     * private messages
-      * /api/block
       * /api/compose
       * /api/del_msg
       * /api/read_all_messages
       * /api/read_message
-      * /api/unblock_subreddit
       * /message/inbox
       * /message/sent
       * /message/unread
@@ -392,91 +390,92 @@ Return a breakdown of subreddit karma.
 
 Return the preference settings of the logged in user
 
-fields| A comma-separated list of items from this set: `beta`  
-`threaded_messages`  
-`hide_downs`  
-`private_feeds`  
+fields| A comma-separated list of items from this set: `threaded_messages`  
 `activity_relevant_ads`  
-`enable_reddit_pro_analytics_emails`  
+`email_messages`  
 `profile_opt_out`  
-`bad_comment_autocollapse`  
-`third_party_site_data_personalized_content`  
 `show_link_flair`  
-`live_bar_recommendations_enabled`  
 `show_trending`  
-`top_karma_subreddits`  
 `country_code`  
-`theme_selector`  
-`monitor_mentions`  
-`email_comment_reply`  
-`newwindow`  
-`email_new_user_welcome`  
-`research`  
-`ignore_suggested_sort`  
-`show_presence`  
-`email_upvote_comment`  
-`email_digests`  
-`weekly_recap_email`  
-`whatsapp_comment_reply`  
-`num_comments`  
-`feed_recommendations_enabled`  
 `clickgadget`  
 `use_global_defaults`  
-`label_nsfw`  
-`domain_details`  
-`show_stylesheets`  
+`enable_reddit_pro_analytics_emails`  
 `live_orangereds`  
-`highlight_controversial`  
+`email_new_user_welcome`  
+`third_party_data_personalized_ads`  
+`email_chat_request`  
+`hide_from_robots`  
+`email_upvote_post`  
+`min_link_score`  
+`nightmode`  
+`enable_default_themes`  
+`third_party_site_data_personalized_ads`  
+`survey_last_seen_time`  
+`email_community_discovery`  
+`collapse_read_messages`  
+`mark_messages_read`  
+`hide_ads`  
+`sms_notifications_enabled`  
+`numsites`  
+`email_private_message`  
+`hide_downs`  
+`hide_ups`  
+`theme_selector`  
+`email_weekly_topic`  
+`ignore_suggested_sort`  
+`research`  
+`label_nsfw`  
 `no_profanity`  
 `email_unsubscribe_all`  
 `whatsapp_enabled`  
-`lang`  
-`in_redesign_beta`  
-`email_messages`  
-`third_party_data_personalized_ads`  
-`email_chat_request`  
-`allow_clicktracking`  
-`hide_from_robots`  
-`show_gold_expiration`  
-`show_twitter`  
-`compress`  
 `store_visits`  
-`video_autoplay`  
-`email_upvote_post`  
-`email_username_mention`  
-`media_preview`  
-`email_user_new_follower`  
-`nightmode`  
-`enable_default_themes`  
-`geopopular`  
-`third_party_site_data_personalized_ads`  
-`survey_last_seen_time`  
 `threaded_modmail`  
+`email_username_mention`  
+`show_gold_expiration`  
+`show_location_based_recommendations`  
+`geopopular`  
+`send_welcome_messages`  
+`highlight_new_comments`  
+`accept_pms`  
+`show_stylesheets`  
+`monitor_mentions`  
+`feed_recommendations_enabled`  
+`domain_details`  
+`over_18`  
+`in_redesign_beta`  
+`media_preview`  
 `enable_followers`  
-`hide_ups`  
 `min_comment_score`  
 `public_votes`  
-`show_location_based_recommendations`  
 `email_post_reply`  
-`collapse_read_messages`  
-`show_flair`  
-`mark_messages_read`  
+`whatsapp_comment_reply`  
 `search_include_over_18`  
-`hide_ads`  
-`third_party_personalized_ads`  
-`min_link_score`  
-`over_18`  
-`sms_notifications_enabled`  
-`numsites`  
-`media`  
-`legacy_search`  
-`email_private_message`  
-`send_crosspost_messages`  
-`send_welcome_messages`  
-`email_community_discovery`  
-`highlight_new_comments`  
+`newwindow`  
 `default_comment_sort`  
-`accept_pms`  
+`email_comment_reply`  
+`video_autoplay`  
+`private_feeds`  
+`email_upvote_comment`  
+`email_digests`  
+`weekly_recap_email`  
+`num_comments`  
+`highlight_controversial`  
+`legacy_search`  
+`bad_comment_autocollapse`  
+`live_bar_recommendations_enabled`  
+`allow_clicktracking`  
+`show_twitter`  
+`compress`  
+`beta`  
+`email_user_new_follower`  
+`third_party_site_data_personalized_content`  
+`lang`  
+`show_flair`  
+`send_crosspost_messages`  
+`third_party_personalized_ads`  
+`top_karma_subreddits`  
+`show_presence`  
+`media`  
 ---|---  
   
 #
@@ -511,6 +510,7 @@ This endpoint expects JSON data of this format|
       "email_upvote_post": boolean value,
       "email_user_new_follower": boolean value,
       "email_username_mention": boolean value,
+      "email_weekly_topic": boolean value,
       "enable_default_themes": boolean value,
       "enable_followers": boolean value,
       "enable_reddit_pro_analytics_emails": boolean value,
@@ -1765,16 +1765,6 @@ Get details about a specific update in a live thread.
 
 #
 
-### POST /api/block[privatemessages](https://github.com/reddit/reddit/wiki/OAuth2)
-
-For blocking the author of a thing via inbox. Only accessible to approved OAuth applications
-
-id| fullname of a thing  
----|---  
-uh / X-Modhash header| a modhash  
-  
-#
-
 ### POST /api/compose[privatemessages](https://github.com/reddit/reddit/wiki/OAuth2)
 
 Handles message composition under /message/compose.
@@ -1815,14 +1805,6 @@ uh / X-Modhash header| a modhash
 ### POST /api/read_message[privatemessages](https://github.com/reddit/reddit/wiki/OAuth2)
 
 id| A comma-separated list of thing fullnames  
----|---  
-uh / X-Modhash header| a modhash  
-  
-#
-
-### POST /api/unblock_subreddit[privatemessages](https://github.com/reddit/reddit/wiki/OAuth2)
-
-id| fullname of a thing  
 ---|---  
 uh / X-Modhash header| a modhash  
   
@@ -2330,7 +2312,7 @@ user| account username
 
 Create a mod user note where type=NOTE.
 
-label| (optional) one of (BOT_BAN, PERMA_BAN, BAN, ABUSE_WARNING, SPAM_WARNING, SPAM_WATCH, SOLID_CONTRIBUTOR, HELPFUL_USER)  
+label| (optional) one of (BOT_BAN, PERMA_BAN, BAN, ABUSE_WARNING, SPAM_WARNING, SPAM_WATCH, SOLID_CONTRIBUTOR, HELPFUL_USER, USER_SUMMARY)  
 ---|---  
 note| Content of the note, should be a string with a maximum character limit of 250  
 reddit_id| (optional) a fullname of a comment or post (should have either a t1 or t3 prefix)  
@@ -4032,4 +4014,4 @@ REDDIT and the ALIEN Logo are registered trademarks of reddit inc.
 
 ![](//reddit.com/static/pixel.png)
 
-π Rendered by PID 81607 on reddit-service-r2-loggedout-f67cf894f-lkpvl at 2025-10-23 03:00:35.305245+00:00 running 85076eb country code: US.
+π Rendered by PID 96961 on reddit-service-r2-loggedout-64d86d8bc6-8cwms at 2025-10-24 02:57:18.727264+00:00 running 3bb1bbf country code: US.
