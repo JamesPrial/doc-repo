@@ -152,11 +152,11 @@ jobs:
 
           # Get health status
           echo "Health Status:"
-          curl -s http://localhost:8000/health | python -m json.tool
+          curl -s http://localhost:8000/health | python3 -m json.tool
 
           # Get statistics
           echo -e "\nDatabase Statistics:"
-          curl -s http://localhost:8000/stats | python -m json.tool
+          curl -s http://localhost:8000/stats | python3 -m json.tool
 
           echo "✅ Deployment verified successfully"
 
