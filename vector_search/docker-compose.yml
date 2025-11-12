@@ -5,7 +5,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
     container_name: vector-search-api
+    user: "${UID:-1000}:${GID:-1000}"
     restart: unless-stopped
     ports:
       - "8000:8000"

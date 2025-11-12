@@ -20,6 +20,16 @@ COPY . .
 # Create directory for ChromaDB persistence
 RUN mkdir -p /app/chroma_db
 
+# Create non-root user with configurable UID/GID
+ARG UID=1000
+ARG GID=1000
+RUN groupadd -g ${GID} appuser && \
+    useradd -u ${UID} -g ${GID} -m -s /bin/bash appuser && \
+    chown -R appuser:appuser /app
+
+# Switch to non-root user
+USER appuser
+
 # Expose FastAPI port
 EXPOSE 8000
 
