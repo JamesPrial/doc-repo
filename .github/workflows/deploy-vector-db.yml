@@ -76,13 +76,16 @@ jobs:
         run: |
           echo "🔄 Starting document indexing..."
 
-          # Check if we should do a full reset
+          # Build the Docker image first
+          docker-compose build
+
+          # Run indexing in container
           if [[ "${{ github.event.inputs.force_reindex }}" == "true" ]]; then
             echo "⚠️  Force re-index requested, resetting database..."
-            python index_documents.py --reset
+            docker-compose run --rm vector-search-api python index_documents.py --reset
           else
             echo "📝 Incremental indexing (changed documents only)..."
-            python index_documents.py
+            docker-compose run --rm vector-search-api python index_documents.py
           fi
 
           echo "✅ Indexing completed"
