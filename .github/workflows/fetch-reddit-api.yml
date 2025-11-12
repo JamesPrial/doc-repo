@@ -6,6 +6,10 @@ on:
     - cron: '0 2 * * *'
   workflow_dispatch:  # Allows manual triggering
 
+# Required permissions for committing changes
+permissions:
+  contents: write
+
 jobs:
   fetch-and-convert:
     runs-on: ubuntu-latest
@@ -17,7 +21,8 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.11'
+          cache: 'pip'
 
       - name: Install Python dependencies
         run: |

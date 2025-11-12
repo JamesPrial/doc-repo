@@ -30,7 +30,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests
+          pip install -r scripts/claude/requirements.txt
 
       - name: Run documentation downloader
         run: |
