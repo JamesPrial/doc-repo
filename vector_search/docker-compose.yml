@@ -15,8 +15,8 @@ services:
       # Persist ChromaDB data
       - ./chroma_db:/app/chroma_db
       # Mount documentation directories (read-only)
-      - ../docs/claude:/app/claude/docs:ro
-      - ../docs/reddit:/app/reddit:ro
+      - ../docs/claude:/app/docs/claude:ro
+      - ../docs/reddit:/app/docs/reddit:ro
     environment:
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
     healthcheck:
