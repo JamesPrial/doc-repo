@@ -77,15 +77,15 @@ jobs:
           echo "🔄 Starting document indexing..."
 
           # Build the Docker image first
-          docker-compose build
+          docker compose build
 
           # Run indexing in container
           if [[ "${{ github.event.inputs.force_reindex }}" == "true" ]]; then
             echo "⚠️  Force re-index requested, resetting database..."
-            docker-compose run --rm vector-search-api python index_documents.py --reset
+            docker compose run --rm vector-search-api python index_documents.py --reset
           else
             echo "📝 Incremental indexing (changed documents only)..."
-            docker-compose run --rm vector-search-api python index_documents.py
+            docker compose run --rm vector-search-api python index_documents.py
           fi
 
           echo "✅ Indexing completed"
@@ -97,17 +97,17 @@ jobs:
           echo "🐳 Building and deploying Docker container..."
 
           # Stop existing container if running
-          docker-compose down || true
+          docker compose down || true
 
           # Build new image (use --no-cache only on force reindex for faster builds)
           if [[ "${{ github.event.inputs.force_reindex }}" == "true" ]]; then
-            docker-compose build --no-cache
+            docker compose build --no-cache
           else
-            docker-compose build
+            docker compose build
           fi
 
           # Start container in detached mode
-          docker-compose up -d
+          docker compose up -d
 
           echo "✅ Container deployed"
 
@@ -128,7 +128,7 @@ jobs:
           done
 
           echo "❌ Service failed to become healthy"
-          docker-compose logs
+          docker compose logs
           exit 1
 
       # Step 7: Verify deployment
@@ -159,7 +159,7 @@ jobs:
           echo "Code Changed: ${{ steps.detect-changes.outputs.code_changed }}"
           echo "Force Re-index: ${{ github.event.inputs.force_reindex || 'false' }}"
           echo "Container Status:"
-          docker-compose ps
+          docker compose ps
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 # Configuration Notes:
@@ -183,7 +183,7 @@ jobs:
 # 4. Optionally enable "Force full re-indexing"
 #
 # Monitoring:
-# - Check container logs: docker-compose -f vector_search/docker-compose.yml logs -f
+# - Check container logs: docker compose -f vector_search/docker compose.yml logs -f
 # - Check health: curl http://localhost:8000/health
 # - Check stats: curl http://localhost:8000/stats
 #
