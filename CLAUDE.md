@@ -24,6 +24,7 @@ This is a personal documentation repository that automatically mirrors and maint
    - Converts HTML to Markdown using BeautifulSoup and html2text
    - Output file: `docs/reddit/reddit-api.md`
    - Custom HTML converter supports multiple output formats (JSON, text, markdown, structured)
+   - Reddit-specific filtering mode (`--reddit-mode`) removes navigation/header elements while preserving API endpoints TOC
 
 ### GitHub Pages Site (`docs/`)
 
@@ -46,7 +47,7 @@ python download_docs.py
 # Update Reddit API documentation
 cd scripts/reddit
 curl https://www.reddit.com/dev/api -H "user-agent:u/ArtisticKey4324" > reddit-api.html
-python html_converter.py reddit-api.html --format markdown -o ../../docs/reddit/reddit-api.md
+python html_converter.py reddit-api.html --format markdown --reddit-mode -o ../../docs/reddit/reddit-api.md
 rm reddit-api.html
 ```
 
@@ -83,7 +84,13 @@ ALWAYS PROACTIVELY use @agent-github-cli instead of gh cli commands yourself
 - Multi-format converter supporting JSON, text, markdown, and structured output
 - Structured format extracts: headings, links, images, tables, lists, paragraphs
 - Falls back to basic markdown conversion if html2text is unavailable
+- Reddit-specific filtering mode (`--reddit-mode`):
+  - Removes site header, navigation elements, login/signup prompts
+  - Filters elements with `role="navigation"` or `role="banner"`
+  - Preserves API endpoints table of contents
+  - Reduces unwanted header content by ~70 lines
 - CLI tool: `python html_converter.py input.html -f markdown -o output.md`
+- With Reddit filtering: `python html_converter.py input.html -f markdown --reddit-mode -o output.md`
 
 ### GitHub Actions Workflows
 

@@ -1,72 +1,3 @@
-jump to content
-
-my subreddits
-
-[edit subscriptions](https://www.reddit.com/subreddits/)
-
-  * [popular](https://www.reddit.com/r/popular/)
-  * -[all](https://www.reddit.com/r/all/)
-  * -[users](https://www.reddit.com/users/)
-
-| 
-
-  * [AskReddit](https://www.reddit.com/r/AskReddit/)
-  * -[pics](https://www.reddit.com/r/pics/)
-  * -[funny](https://www.reddit.com/r/funny/)
-  * -[movies](https://www.reddit.com/r/movies/)
-  * -[worldnews](https://www.reddit.com/r/worldnews/)
-  * -[news](https://www.reddit.com/r/news/)
-  * -[todayilearned](https://www.reddit.com/r/todayilearned/)
-  * -[nottheonion](https://www.reddit.com/r/nottheonion/)
-  * -[explainlikeimfive](https://www.reddit.com/r/explainlikeimfive/)
-  * -[mildlyinteresting](https://www.reddit.com/r/mildlyinteresting/)
-  * -[DIY](https://www.reddit.com/r/DIY/)
-  * -[videos](https://www.reddit.com/r/videos/)
-  * -[OldSchoolCool](https://www.reddit.com/r/OldSchoolCool/)
-  * -[TwoXChromosomes](https://www.reddit.com/r/TwoXChromosomes/)
-  * -[tifu](https://www.reddit.com/r/tifu/)
-  * -[Music](https://www.reddit.com/r/Music/)
-  * -[books](https://www.reddit.com/r/books/)
-  * -[LifeProTips](https://www.reddit.com/r/LifeProTips/)
-  * -[dataisbeautiful](https://www.reddit.com/r/dataisbeautiful/)
-  * -[aww](https://www.reddit.com/r/aww/)
-  * -[science](https://www.reddit.com/r/science/)
-  * -[space](https://www.reddit.com/r/space/)
-  * -[Showerthoughts](https://www.reddit.com/r/Showerthoughts/)
-  * -[askscience](https://www.reddit.com/r/askscience/)
-  * -[Jokes](https://www.reddit.com/r/Jokes/)
-  * -[IAmA](https://www.reddit.com/r/IAmA/)
-  * -[Futurology](https://www.reddit.com/r/Futurology/)
-  * -[sports](https://www.reddit.com/r/sports/)
-  * -[UpliftingNews](https://www.reddit.com/r/UpliftingNews/)
-  * -[food](https://www.reddit.com/r/food/)
-  * -[nosleep](https://www.reddit.com/r/nosleep/)
-  * -[creepy](https://www.reddit.com/r/creepy/)
-  * -[history](https://www.reddit.com/r/history/)
-  * -[gifs](https://www.reddit.com/r/gifs/)
-  * -[InternetIsBeautiful](https://www.reddit.com/r/InternetIsBeautiful/)
-  * -[GetMotivated](https://www.reddit.com/r/GetMotivated/)
-  * -[gadgets](https://www.reddit.com/r/gadgets/)
-  * -[announcements](https://www.reddit.com/r/announcements/)
-  * -[WritingPrompts](https://www.reddit.com/r/WritingPrompts/)
-  * -[philosophy](https://www.reddit.com/r/philosophy/)
-  * -[Documentaries](https://www.reddit.com/r/Documentaries/)
-  * -[EarthPorn](https://www.reddit.com/r/EarthPorn/)
-  * -[photoshopbattles](https://www.reddit.com/r/photoshopbattles/)
-  * -[listentothis](https://www.reddit.com/r/listentothis/)
-  * -[blog](https://www.reddit.com/r/blog/)
-
-
-
-[more »](https://www.reddit.com/subreddits/)
-
-[reddit.com](/) api documentation
-
-Want to join? [Log in](https://www.reddit.com/login) or [sign up](https://www.reddit.com/login) in seconds.
-
-
-
-
   * **API methods**[by section](/dev/api)[by oauth scope](/dev/api/oauth)
     * account
       * /api/v1/me
@@ -4014,4 +3945,4 @@ REDDIT and the ALIEN Logo are registered trademarks of reddit inc.
 
 ![](//reddit.com/static/pixel.png)
 
-π Rendered by PID 104077 on reddit-service-r2-loggedout-5c7758d5b7-2d599 at 2025-11-11 03:10:24.610678+00:00 running 45e51c6 country code: US.
+π Rendered by PID 113633 on reddit-service-r2-loggedout-5c7758d5b7-xps7n at 2025-11-12 01:56:02.910052+00:00 running 45e51c6 country code: US.

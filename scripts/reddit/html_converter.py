@@ -32,9 +32,106 @@ except ImportError:
 class HTMLConverter:
     """Convert HTML to various machine-readable formats"""
 
-    def __init__(self, html_content: str):
-        """Initialize converter with HTML content"""
+    def __init__(self, html_content: str, reddit_mode: bool = False):
+        """Initialize converter with HTML content
+
+        Args:
+            html_content: Raw HTML content to convert
+            reddit_mode: If True, apply Reddit-specific filtering to remove navigation/headers
+        """
+        # Apply Reddit-specific filtering before parsing if requested
+        if reddit_mode:
+            html_content = self._filter_reddit_html(html_content)
+
         self.soup = BeautifulSoup(html_content, 'html.parser')
+
+    @staticmethod
+    def _filter_reddit_html(html_content: str) -> str:
+        """Filter Reddit-specific navigation and header elements
+
+        Removes:
+        - Site header and navigation
+        - Login/signup prompts
+        - Popular subreddits navigation
+        - Non-documentation navigation elements
+
+        Preserves:
+        - API endpoints table of contents (cleaned up)
+        - Main API documentation content
+        """
+        soup = BeautifulSoup(html_content, 'html.parser')
+
+        # Remove site header (both <header> tag and div with id="header")
+        for header in soup.find_all('header'):
+            header.decompose()
+        for header in soup.find_all(id='header'):
+            header.decompose()
+
+        # Remove elements with navigation and banner roles
+        for nav in soup.find_all(attrs={'role': ['navigation', 'banner']}):
+            nav.decompose()
+
+        # Remove login/signup prompts (look for common text patterns)
+        elements_to_remove = []
+        for element in soup.find_all(string=lambda text: text and any(phrase in text.lower() for phrase in [
+            'want to join', 'log in or sign up', 'sign up', 'create an account'
+        ])):
+            # Find the parent container
+            parent = element.find_parent(['div', 'section', 'aside', 'header'])
+            if parent and parent not in elements_to_remove:
+                elements_to_remove.append(parent)
+
+        # Remove collected elements
+        for element in elements_to_remove:
+            element.decompose()
+
+        # Remove "jump to content" links
+        for link in soup.find_all('a', string=lambda text: text and 'jump to content' in text.lower()):
+            link.decompose()
+
+        # Remove popular subreddits navigation (typically in divs with class 'side' or similar)
+        for element in soup.find_all(string=lambda text: text and 'my subreddits' in text.lower()):
+            parent = element.find_parent(['div', 'nav', 'aside'])
+            if parent:
+                parent.decompose()
+
+        # Remove any remaining top-level nav or aside elements
+        for element in soup.find_all(['nav', 'aside']):
+            # Keep elements that might contain the API methods list
+            element_text = element.get_text().lower()
+            if 'api method' not in element_text and 'endpoint' not in element_text:
+                element.decompose()
+
+        return str(soup)
+
+    def _format_api_endpoints_toc(self) -> str:
+        """Extract and format the API endpoints table of contents
+
+        Returns a cleaned, well-formatted markdown TOC for API endpoints
+        """
+        # Find the API methods section (typically in a div with class containing 'methods' or 'sidebar')
+        toc_sections = []
+
+        # Look for headings that indicate API sections
+        for heading in self.soup.find_all(['h2', 'h3', 'h4']):
+            heading_text = heading.get_text().strip().lower()
+            if 'api method' in heading_text or 'endpoint' in heading_text:
+                # Found the API methods section
+                # Get the list that follows this heading
+                current = heading.find_next_sibling()
+                while current and current.name in ['ul', 'ol']:
+                    # Extract list items
+                    for li in current.find_all('li', recursive=False):
+                        link = li.find('a')
+                        if link:
+                            text = link.get_text().strip()
+                            href = link.get('href', '')
+                            toc_sections.append(f"- [{text}]({href})")
+                    current = current.find_next_sibling()
+
+        if toc_sections:
+            return "\n## API Endpoints Index\n\n" + "\n".join(toc_sections) + "\n\n"
+        return ""
 
     def to_json(self) -> Dict[str, Any]:
         """Convert HTML to JSON tree structure"""
@@ -267,6 +364,7 @@ Examples:
   %(prog)s input.html --format markdown -o output.md
   %(prog)s input.html --format structured -o output.json
   %(prog)s input.html --format json  # Output to stdout
+  %(prog)s reddit.html --format markdown --reddit-mode -o api.md  # Reddit API with filtering
         """
     )
 
@@ -287,6 +385,11 @@ Examples:
         action='store_true',
         help='Pretty print JSON output'
     )
+    parser.add_argument(
+        '--reddit-mode',
+        action='store_true',
+        help='Apply Reddit-specific filtering to remove navigation/headers'
+    )
 
     args = parser.parse_args()
 
@@ -304,7 +407,7 @@ Examples:
 
     # Convert HTML
     try:
-        converter = HTMLConverter(html_content)
+        converter = HTMLConverter(html_content, reddit_mode=args.reddit_mode)
 
         if args.format == 'json':
             output = json.dumps(

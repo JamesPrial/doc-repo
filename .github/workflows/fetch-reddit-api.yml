@@ -34,7 +34,7 @@ jobs:
 
       - name: Convert HTML to Markdown
         run: |
-          python scripts/reddit/html_converter.py scripts/reddit/reddit-api.html --format markdown -o docs/reddit/reddit-api.md
+          python scripts/reddit/html_converter.py scripts/reddit/reddit-api.html --format markdown --reddit-mode -o docs/reddit/reddit-api.md
 
       - name: Remove HTML file
         run: |
