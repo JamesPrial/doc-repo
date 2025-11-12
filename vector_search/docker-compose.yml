@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  vector-search-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vector-search-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persist ChromaDB data
+      - ./chroma_db:/app/chroma_db
+      # Mount documentation directories (read-only)
+      - ../claude/docs:/app/claude/docs:ro
+      - ../reddit:/app/reddit:ro
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - vector-search-network
+
+networks:
+  vector-search-network:
+    driver: bridge

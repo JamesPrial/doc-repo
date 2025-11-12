@@ -1,0 +1,184 @@
+name: Deploy Vector Database
+
+# Trigger on documentation updates or manual dispatch
+on:
+  push:
+    branches:
+      - main
+    paths:
+      # Only trigger when documentation changes
+      - 'claude/docs/**'
+      - 'reddit/*.md'
+      - 'vector_search/**'
+  workflow_dispatch:
+    inputs:
+      force_reindex:
+        description: 'Force full re-indexing of all documents'
+        required: false
+        type: boolean
+        default: false
+
+# Minimal permissions - only read repository contents
+permissions:
+  contents: read
+
+# Prevent concurrent deployments
+concurrency:
+  group: vector-db-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy Vector Search Service
+    runs-on: self-hosted
+    timeout-minutes: 30
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # Need at least 2 commits to detect changes
+
+      # Step 2: Detect if documentation files changed
+      - name: Detect documentation changes
+        id: detect-changes
+        run: |
+          # Check if docs changed in this push (compare with previous commit)
+          if git diff --name-only HEAD~1 HEAD | grep -qE '^(claude/docs/|reddit/.*\.md)'; then
+            echo "docs_changed=true" >> $GITHUB_OUTPUT
+            echo "📚 Documentation changes detected"
+          else
+            echo "docs_changed=false" >> $GITHUB_OUTPUT
+            echo "ℹ️  No documentation changes detected"
+          fi
+
+          # Check if vector_search code changed
+          if git diff --name-only HEAD~1 HEAD | grep -qE '^vector_search/'; then
+            echo "code_changed=true" >> $GITHUB_OUTPUT
+            echo "🔧 Vector search code changes detected"
+          else
+            echo "code_changed=false" >> $GITHUB_OUTPUT
+            echo "ℹ️  No vector search code changes detected"
+          fi
+
+      # Step 3: Create .env file with API key
+      - name: Configure environment variables
+        working-directory: vector_search
+        run: |
+          echo "GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }}" > .env
+          echo "✅ Environment variables configured"
+
+      # Step 4: Re-index documents (only if docs changed or forced)
+      - name: Re-index documentation
+        working-directory: vector_search
+        if: steps.detect-changes.outputs.docs_changed == 'true' || github.event.inputs.force_reindex == 'true'
+        run: |
+          echo "🔄 Starting document indexing..."
+
+          # Check if we should do a full reset
+          if [[ "${{ github.event.inputs.force_reindex }}" == "true" ]]; then
+            echo "⚠️  Force re-index requested, resetting database..."
+            python index_documents.py --reset
+          else
+            echo "📝 Incremental indexing (changed documents only)..."
+            python index_documents.py
+          fi
+
+          echo "✅ Indexing completed"
+
+      # Step 5: Build and deploy Docker container
+      - name: Deploy vector search service
+        working-directory: vector_search
+        run: |
+          echo "🐳 Building and deploying Docker container..."
+
+          # Stop existing container if running
+          docker-compose down || true
+
+          # Build new image
+          docker-compose build --no-cache
+
+          # Start container in detached mode
+          docker-compose up -d
+
+          echo "✅ Container deployed"
+
+      # Step 6: Wait for service to be healthy
+      - name: Wait for service health check
+        run: |
+          echo "⏳ Waiting for service to be healthy..."
+
+          # Wait up to 60 seconds for health check
+          for i in {1..12}; do
+            if curl -sf http://localhost:8000/health > /dev/null 2>&1; then
+              echo "✅ Service is healthy!"
+              exit 0
+            fi
+            echo "Attempt $i/12: Service not ready yet..."
+            sleep 5
+          done
+
+          echo "❌ Service failed to become healthy"
+          docker-compose logs
+          exit 1
+
+      # Step 7: Verify deployment
+      - name: Verify deployment
+        run: |
+          echo "🔍 Verifying deployment..."
+
+          # Get health status
+          echo "Health Status:"
+          curl -s http://localhost:8000/health | python -m json.tool
+
+          # Get statistics
+          echo -e "\nDatabase Statistics:"
+          curl -s http://localhost:8000/stats | python -m json.tool
+
+          echo "✅ Deployment verified successfully"
+
+      # Step 8: Display deployment summary
+      - name: Deployment summary
+        if: always()
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "📊 Deployment Summary"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Documentation Changed: ${{ steps.detect-changes.outputs.docs_changed }}"
+          echo "Code Changed: ${{ steps.detect-changes.outputs.code_changed }}"
+          echo "Force Re-index: ${{ github.event.inputs.force_reindex || 'false' }}"
+          echo "Container Status:"
+          docker-compose ps
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# Configuration Notes:
+#
+# Required Setup:
+# 1. Self-hosted runner must be configured with label 'self-hosted'
+# 2. Runner must have Docker and Docker Compose installed
+# 3. Add GitHub secret: GOOGLE_API_KEY (get from https://aistudio.google.com/apikey)
+#
+# Deployment Behavior:
+# - Triggers automatically when docs change in claude/docs/** or reddit/*.md
+# - Can be manually triggered with optional force re-index
+# - Only re-indexes when documentation actually changes (saves time and API calls)
+# - Uses Docker for containerization (no bare metal installation)
+# - Includes health checks to verify successful deployment
+#
+# Manual Deployment:
+# 1. Go to Actions tab in GitHub
+# 2. Select "Deploy Vector Database"
+# 3. Click "Run workflow"
+# 4. Optionally enable "Force full re-indexing"
+#
+# Monitoring:
+# - Check container logs: docker-compose -f vector_search/docker-compose.yml logs -f
+# - Check health: curl http://localhost:8000/health
+# - Check stats: curl http://localhost:8000/stats
+#
+# Troubleshooting:
+# - If deployment fails, check workflow logs in GitHub Actions
+# - Verify GOOGLE_API_KEY is set correctly in GitHub secrets
+# - Ensure self-hosted runner has network access to Google API
+# - Check Docker container logs for application errors
