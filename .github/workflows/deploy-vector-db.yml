@@ -90,8 +90,8 @@ jobs:
           echo "🔄 Starting document indexing..."
 
           # Export UID/GID to ensure correct file permissions
-          export UID=$(id -u)
-          export GID=$(id -g)
+          export USER_ID=$(id -u)
+          export GROUP_ID=$(id -g)
 
           # Build the Docker image first
           docker compose build
@@ -114,8 +114,8 @@ jobs:
           echo "🐳 Building and deploying Docker container..."
 
           # Export UID/GID to ensure correct file permissions
-          export UID=$(id -u)
-          export GID=$(id -g)
+          export USER_ID=$(id -u)
+          export GROUP_ID=$(id -g)
 
           # Stop existing container if running
           docker compose down || true
