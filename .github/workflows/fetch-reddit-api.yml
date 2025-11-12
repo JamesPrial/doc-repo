@@ -21,23 +21,23 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          pip install -r reddit/requirements.txt
+          pip install -r scripts/reddit/requirements.txt
 
       - name: Fetch Reddit API documentation
         run: |
-          curl https://www.reddit.com/dev/api -H "user-agent:u/ArtisticKey4324" > reddit/reddit-api.html
+          curl https://www.reddit.com/dev/api -H "user-agent:u/ArtisticKey4324" > scripts/reddit/reddit-api.html
 
       - name: Convert HTML to Markdown
         run: |
-          python reddit/html_converter.py reddit/reddit-api.html --format markdown -o reddit/reddit-api.md
+          python scripts/reddit/html_converter.py scripts/reddit/reddit-api.html --format markdown -o docs/reddit/reddit-api.md
 
       - name: Remove HTML file
         run: |
-          rm reddit/reddit-api.html
+          rm scripts/reddit/reddit-api.html
 
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add reddit/reddit-api.md
+          git add docs/reddit/reddit-api.md
           git diff --quiet && git diff --staged --quiet || (git commit -m "docs: update Reddit API documentation (markdown)" && git push)

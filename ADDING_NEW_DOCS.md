@@ -13,11 +13,11 @@ The system has 3 main parts:
 
 ## Step-by-Step Guide
 
-### Step 1: Create Documentation Directory
+### Step 1: Create Script Directory
 
 ```bash
-mkdir -p your-docs
-cd your-docs
+mkdir -p scripts/your-docs
+cd scripts/your-docs
 ```
 
 ### Step 2: Create Downloader Script
@@ -25,7 +25,7 @@ cd your-docs
 Example for downloading markdown files:
 
 ```python
-# your-docs/download_docs.py
+# scripts/your-docs/download_docs.py
 import requests
 from pathlib import Path
 import time
@@ -33,8 +33,8 @@ import time
 def download_docs():
     """Download documentation from source."""
     BASE_URL = "https://docs.example.com"
-    OUTPUT_DIR = Path("docs")
-    OUTPUT_DIR.mkdir(exist_ok=True)
+    OUTPUT_DIR = Path("../../docs/your-docs")
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
     # Get your list of doc URLs (from sitemap, API, etc.)
     doc_urls = [
@@ -60,7 +60,7 @@ if __name__ == "__main__":
 ### Step 3: Create requirements.txt
 
 ```bash
-# your-docs/requirements.txt
+# scripts/your-docs/requirements.txt
 requests>=2.31.0
 ```
 
@@ -92,17 +92,17 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        working-directory: your-docs
+        working-directory: scripts/your-docs
         run: pip install -r requirements.txt
 
       - name: Download documentation
-        working-directory: your-docs
+        working-directory: scripts/your-docs
         run: python download_docs.py
 
       - name: Check for changes
         id: changes
         run: |
-          if git diff --quiet your-docs/; then
+          if git diff --quiet docs/your-docs/; then
             echo "changed=false" >> $GITHUB_OUTPUT
           else
             echo "changed=true" >> $GITHUB_OUTPUT
@@ -113,7 +113,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add your-docs/
+          git add docs/your-docs/ scripts/your-docs/
           git commit -m "docs: update Your Docs documentation"
           git push
 ```
@@ -130,19 +130,19 @@ def file_to_url(self, file_path: str) -> str:
     file_path = str(file_path)
 
     # Claude documentation
-    if "claude/docs/" in file_path:
-        match = re.search(r'claude/docs/(.+)\.md$', file_path)
+    if "docs/claude/" in file_path:
+        match = re.search(r'docs/claude/(.+)\.md$', file_path)
         if match:
             doc_path = match.group(1)
             return f"https://docs.claude.com/en/docs/{doc_path}"
 
     # Reddit documentation
-    if "reddit/reddit-api.md" in file_path:
+    if "docs/reddit/reddit-api.md" in file_path:
         return "https://www.reddit.com/dev/api"
 
     # YOUR NEW DOCS - Add this block:
-    if "your-docs/docs" in file_path:
-        match = re.search(r'your-docs/docs/(.+)\.md$', file_path)
+    if "docs/your-docs/" in file_path:
+        match = re.search(r'docs/your-docs/(.+)\.md$', file_path)
         if match:
             doc_path = match.group(1)
             return f"https://docs.example.com/{doc_path}"
@@ -159,21 +159,21 @@ def main():
     # ... existing code ...
 
     # Process Claude documentation
-    claude_dir = repo_root / "claude" / "docs"
+    claude_dir = repo_root / "docs" / "claude"
     claude_chunks = []
     if claude_dir.exists():
         print("Processing Claude Documentation")
         claude_chunks = processor.process_directory(claude_dir)
 
     # Process Reddit documentation
-    reddit_dir = repo_root / "reddit"
+    reddit_dir = repo_root / "docs" / "reddit"
     reddit_chunks = []
     if reddit_dir.exists():
         print("Processing Reddit API Documentation")
         reddit_chunks = processor.process_directory(reddit_dir, pattern="*.md")
 
     # YOUR NEW DOCS - Add this block:
-    your_docs_dir = repo_root / "your-docs" / "docs"
+    your_docs_dir = repo_root / "docs" / "your-docs"
     your_docs_chunks = []
     if your_docs_dir.exists():
         print("Processing Your Documentation")
@@ -193,9 +193,9 @@ on:
     branches:
       - main
     paths:
-      - 'claude/docs/**'
-      - 'reddit/*.md'
-      - 'your-docs/docs/**'  # Add this line
+      - 'docs/claude/**'
+      - 'docs/reddit/*.md'
+      - 'docs/your-docs/**'  # Add this line
       - 'vector_search/**'
 ```
 
@@ -205,7 +205,7 @@ And update the change detection step:
 - name: Detect documentation changes
   id: detect-changes
   run: |
-    if git diff --name-only HEAD~1 HEAD | grep -qE '^(claude/docs/|reddit/.*\.md|your-docs/docs/)'; then
+    if git diff --name-only HEAD~1 HEAD | grep -qE '^(docs/claude/|docs/reddit/.*\.md|docs/your-docs/)'; then
       echo "docs_changed=true" >> $GITHUB_OUTPUT
     else
       echo "docs_changed=false" >> $GITHUB_OUTPUT
@@ -214,26 +214,20 @@ And update the change detection step:
 
 ### Step 7: Add to GitHub Pages (Optional)
 
-If you want docs browsable on GitHub Pages:
-
-```bash
-cd docs
-ln -s ../your-docs your-docs
-git add your-docs
-```
-
-Edit `docs/_sidebar.md`:
+If you want docs browsable on GitHub Pages, edit `docs/_sidebar.md`:
 
 ```markdown
 - Claude Documentation
-  - [Overview](/claude/docs/README.md)
+  - [Overview](/claude/README.md)
 
 - Reddit API
   - [API Reference](/reddit/reddit-api.md)
 
 - Your Docs
-  - [Getting Started](/your-docs/docs/getting-started.md)
+  - [Getting Started](/your-docs/getting-started.md)
 ```
+
+Note: Documentation files are already in `docs/your-docs/` from the downloader script, no symlinking needed.
 
 ---
 
@@ -242,12 +236,12 @@ Edit `docs/_sidebar.md`:
 ### 1. Test the downloader locally
 
 ```bash
-cd your-docs
+cd scripts/your-docs
 pip install -r requirements.txt
 python download_docs.py
 
 # Verify files downloaded
-ls -lah docs/
+ls -lah ../../docs/your-docs/
 ```
 
 ### 2. Test vector search indexing
@@ -283,13 +277,13 @@ Here's a complete working example:
 ### 1. Create the downloader
 
 ```python
-# python-docs/download_docs.py
+# scripts/python-docs/download_docs.py
 import requests
 from pathlib import Path
 
 def download_python_docs():
-    OUTPUT_DIR = Path("docs")
-    OUTPUT_DIR.mkdir(exist_ok=True)
+    OUTPUT_DIR = Path("../../docs/python-docs")
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
     # Python tutorial pages
     base = "https://docs.python.org/3/tutorial"
@@ -312,14 +306,14 @@ if __name__ == "__main__":
 
 ```python
 # In document_processor.py, file_to_url method:
-if "python-docs/docs" in file_path:
-    match = re.search(r'python-docs/docs/(.+)\.html$', file_path)
+if "docs/python-docs/" in file_path:
+    match = re.search(r'docs/python-docs/(.+)\.html$', file_path)
     if match:
         doc_path = match.group(1)
         return f"https://docs.python.org/3/tutorial/{doc_path}.html"
 
 # In index_documents.py, main function:
-python_docs_dir = repo_root / "python-docs" / "docs"
+python_docs_dir = repo_root / "docs" / "python-docs"
 python_docs_chunks = []
 if python_docs_dir.exists():
     print("Processing Python Documentation")
@@ -336,9 +330,9 @@ Done!
 
 When adding new docs, make sure you:
 
-- [ ] Created `your-docs/` directory
-- [ ] Created `your-docs/download_docs.py`
-- [ ] Created `your-docs/requirements.txt`
+- [ ] Created `scripts/your-docs/` directory
+- [ ] Created `scripts/your-docs/download_docs.py`
+- [ ] Created `scripts/your-docs/requirements.txt`
 - [ ] Created `.github/workflows/update-your-docs.yml`
 - [ ] Updated `vector_search/document_processor.py` (file_to_url method)
 - [ ] Updated `vector_search/index_documents.py` (main function)
@@ -354,9 +348,10 @@ When adding new docs, make sure you:
 ### HTML to Markdown Conversion
 
 ```python
-# your-docs/download_docs.py
+# scripts/your-docs/download_docs.py
 import requests
 import html2text
+from pathlib import Path
 
 def download_and_convert():
     h = html2text.HTML2Text()
@@ -366,7 +361,7 @@ def download_and_convert():
     response = requests.get("https://docs.example.com")
     markdown = h.handle(response.text)
 
-    Path("docs/index.md").write_text(markdown)
+    Path("../../docs/your-docs/index.md").write_text(markdown)
 ```
 
 ### API-Based Documentation
@@ -379,9 +374,12 @@ def fetch_from_api():
     )
     docs = response.json()
 
+    output_dir = Path("../../docs/your-docs")
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     for doc in docs:
         filename = f"{doc['slug']}.md"
-        Path(f"docs/{filename}").write_text(doc['content'])
+        (output_dir / filename).write_text(doc['content'])
 ```
 
 ### Git Clone Approach
@@ -391,7 +389,8 @@ def fetch_from_api():
 - name: Clone documentation
   run: |
     git clone --depth 1 https://github.com/org/docs.git temp
-    cp -r temp/content/* your-docs/docs/
+    mkdir -p docs/your-docs
+    cp -r temp/content/* docs/your-docs/
     rm -rf temp
 ```
 
@@ -419,5 +418,5 @@ def fetch_from_api():
 ## Need Help?
 
 Check existing implementations:
-- **Claude Docs**: `claude/download_docs.py` - Markdown from sitemap
-- **Reddit API**: `reddit/html_converter.py` - HTML to Markdown
+- **Claude Docs**: `scripts/claude/download_docs.py` - Markdown from sitemap
+- **Reddit API**: `scripts/reddit/html_converter.py` - HTML to Markdown

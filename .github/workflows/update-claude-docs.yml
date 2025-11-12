@@ -34,7 +34,7 @@ jobs:
 
       - name: Run documentation downloader
         run: |
-          python claude/download_docs.py
+          python scripts/claude/download_docs.py
 
       - name: Check for changes
         id: git-check
@@ -46,7 +46,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add claude/docs/ claude/sitemap_cache.xml
+          git add docs/claude/ scripts/claude/sitemap_cache.xml
           git commit -m "docs: update Claude documentation ($(date -u '+%Y-%m-%d'))"
           git push
 
@@ -54,5 +54,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: docs-manifest
-          path: claude/docs/manifest.json
+          path: docs/claude/manifest.json
           retention-days: 30

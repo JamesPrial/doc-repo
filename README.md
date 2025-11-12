@@ -23,10 +23,17 @@ I use **GitHub Actions** to automatically keep the documentation up to date:
 ## Directory Structure
 
 ```
-claude/
-├── docs/                  # Downloaded documentation files
-├── download_docs.py       # Python script that fetches the documentation
-└── sitemap_cache.xml      # Cached sitemap from docs.claude.com
+docs/                      # GitHub Pages site with all documentation
+├── claude/                # Claude Code documentation (110+ files)
+└── reddit/                # Reddit API documentation
+
+scripts/                   # All downloader/converter scripts
+├── claude/
+│   ├── download_docs.py   # Claude documentation downloader
+│   └── sitemap_cache.xml  # Cached sitemap
+└── reddit/
+    ├── html_converter.py  # HTML to Markdown converter
+    └── requirements.txt   # Python dependencies
 ```
 
 ## Usage

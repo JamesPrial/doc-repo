@@ -8,26 +8,29 @@ This is a personal documentation repository that automatically mirrors and maint
 
 ## Architecture
 
-### Two Documentation Pipelines
+### Documentation Sources and Scripts
 
-1. **Claude Code Documentation** (`claude/`)
+1. **Claude Code Documentation**
+   - Downloader script: `scripts/claude/download_docs.py`
    - Downloads markdown files directly from docs.claude.com's sitemap
    - Preserves original markdown format without conversion
-   - Saves to `claude/docs/` with directory structure mirroring source URLs
+   - Saves to `docs/claude/` with directory structure mirroring source URLs
    - Creates `manifest.json` tracking all downloaded files
+   - Cache stored in `scripts/claude/sitemap_cache.xml`
 
-2. **Reddit API Documentation** (`reddit/`)
+2. **Reddit API Documentation**
+   - Converter script: `scripts/reddit/html_converter.py`
    - Fetches HTML from reddit.com/dev/api
    - Converts HTML to Markdown using BeautifulSoup and html2text
-   - Single output file: `reddit/reddit-api.md`
+   - Output file: `docs/reddit/reddit-api.md`
    - Custom HTML converter supports multiple output formats (JSON, text, markdown, structured)
 
 ### GitHub Pages Site (`docs/`)
 
 - Powered by Docsify (client-side rendering, no build step)
-- Uses symlinks to reference source directories:
-  - `docs/claude` → `../claude`
-  - `docs/reddit` → `../reddit`
+- Contains all documentation content directly (no symlinks):
+  - `docs/claude/` - Claude Code documentation (110+ files)
+  - `docs/reddit/` - Reddit API documentation
 - Configuration in `docs/index.html` and `docs/_sidebar.md`
 - Custom styling in `docs/custom.css` (dark theme)
 
@@ -37,13 +40,13 @@ This is a personal documentation repository that automatically mirrors and maint
 
 ```bash
 # Update Claude documentation
-cd claude
+cd scripts/claude
 python download_docs.py
 
 # Update Reddit API documentation
-cd reddit
+cd scripts/reddit
 curl https://www.reddit.com/dev/api -H "user-agent:u/ArtisticKey4324" > reddit-api.html
-python html_converter.py reddit-api.html --format markdown -o reddit-api.md
+python html_converter.py reddit-api.html --format markdown -o ../../docs/reddit/reddit-api.md
 rm reddit-api.html
 ```
 
@@ -65,16 +68,17 @@ ALWAYS PROACTIVELY use @agent-github-cli instead of gh cli commands yourself
 
 ## Key Implementation Details
 
-### Claude Documentation Downloader (`claude/download_docs.py`)
+### Claude Documentation Downloader (`scripts/claude/download_docs.py`)
 
 - Fetches sitemap.xml from docs.claude.com
 - Filters URLs containing `/en/docs/`
 - Appends `.md` to URLs to get markdown versions
 - Uses rate limiting (0.5s delay between requests)
 - Skips already-downloaded files for efficiency
-- Saves sitemap cache to `sitemap_cache.xml`
+- Saves documentation to `docs/claude/`
+- Saves sitemap cache to `scripts/claude/sitemap_cache.xml`
 
-### HTML Converter (`reddit/html_converter.py`)
+### HTML Converter (`scripts/reddit/html_converter.py`)
 
 - Multi-format converter supporting JSON, text, markdown, and structured output
 - Structured format extracts: headings, links, images, tables, lists, paragraphs
@@ -93,7 +97,7 @@ Both workflows (`.github/workflows/`):
 ## Python Dependencies
 
 - **Claude downloader**: `requests` only
-- **Reddit converter**: `beautifulsoup4`, `html2text`, `lxml` (see `reddit/requirements.txt`)
+- **Reddit converter**: `beautifulsoup4`, `html2text`, `lxml` (see `scripts/reddit/requirements.txt`)
 - **Python version**: 3.11+ (3.x for Reddit workflow)
 
 ## Vector Search System (`vector_search/`)
@@ -143,7 +147,7 @@ python api.py
 - Generates MD5 chunk IDs for deduplication
 
 **Indexer** (`index_documents.py`):
-- Processes `claude/docs/` (110+ files) and `reddit/reddit-api.md`
+- Processes `docs/claude/` (110+ files) and `docs/reddit/reddit-api.md`
 - Generates embeddings via Gemini API (rate limited: 0.5s between requests)
 - Batches processing (100 chunks per batch)
 - Stores in ChromaDB with rich metadata (hierarchy, content type, keywords, URLs)
@@ -164,10 +168,40 @@ python api.py
 - `fastapi>=0.115.0`, `uvicorn[standard]>=0.32.0`: REST API
 - `python-dotenv>=1.0.0`: Environment config
 
-## Directory Structure Notes
+## Directory Structure
 
-- The `docs/` directory for GitHub Pages is separate from documentation source directories
-- Symlinks in `docs/` allow Docsify to serve content from `claude/` and `reddit/` without duplication
-- Git tracks the symlinks themselves, not their targets
-- All actual documentation lives in `claude/docs/` (110+ files) and `reddit/reddit-api.md`
-- `vector_search/chroma_db/` contains the vector database (gitignored, created during indexing)
+```
+/docs/                          # GitHub Pages site with ALL documentation
+├── claude/                     # Claude Code documentation (110+ files)
+│   ├── manifest.json
+│   └── [markdown files]
+├── reddit/                     # Reddit API documentation
+│   └── reddit-api.md
+├── index.html                  # Docsify configuration
+├── custom.css                  # Custom styling
+├── _sidebar.md                 # Sidebar navigation
+└── _navbar.md                  # Top navigation
+
+/scripts/                       # All scripts and tools (separated from docs)
+├── claude/
+│   ├── download_docs.py        # Claude documentation downloader
+│   └── sitemap_cache.xml       # Sitemap cache
+└── reddit/
+    ├── html_converter.py       # HTML to Markdown converter
+    └── requirements.txt        # Python dependencies
+
+/vector_search/                 # Vector search service (independent)
+├── api.py                      # FastAPI server
+├── document_processor.py       # Document processing
+├── index_documents.py          # Indexing script
+├── chroma_db/                  # Vector database (gitignored)
+└── [other files]
+```
+
+### Key Points
+
+- **Clean separation**: `/docs/` contains ONLY documentation content, `/scripts/` contains ONLY tools
+- **No symlinks**: All documentation files are stored directly in their final locations
+- **Scripts organized by source**: Each documentation source has its own script directory
+- **Vector search remains independent**: `vector_search/` is a standalone service
+- Git tracks all directories and files (except gitignored items like `chroma_db/`)

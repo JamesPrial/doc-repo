@@ -163,15 +163,15 @@ class MarkdownDocumentProcessor:
         file_path = str(file_path)
 
         # Claude documentation
-        if "claude/docs/" in file_path:
-            # Extract path after claude/docs/
-            match = re.search(r'claude/docs/(.+)\.md$', file_path)
+        if "docs/claude/" in file_path:
+            # Extract path after docs/claude/
+            match = re.search(r'docs/claude/(.+)\.md$', file_path)
             if match:
                 doc_path = match.group(1)
                 return f"https://docs.claude.com/en/docs/{doc_path}"
 
         # Reddit documentation
-        if "reddit/reddit-api.md" in file_path:
+        if "docs/reddit/reddit-api.md" in file_path:
             return "https://www.reddit.com/dev/api"
 
         # Fallback

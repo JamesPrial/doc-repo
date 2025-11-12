@@ -271,7 +271,7 @@ def main():
     repo_root = Path(__file__).parent.parent
 
     # Process Claude documentation
-    claude_dir = repo_root / "claude" / "docs"
+    claude_dir = repo_root / "docs" / "claude"
     claude_chunks = []
     if claude_dir.exists():
         print(f"\n{'='*80}")
@@ -280,7 +280,7 @@ def main():
         claude_chunks = processor.process_directory(claude_dir)
 
     # Process Reddit documentation
-    reddit_dir = repo_root / "reddit"
+    reddit_dir = repo_root / "docs" / "reddit"
     reddit_chunks = []
     if reddit_dir.exists():
         print(f"\n{'='*80}")

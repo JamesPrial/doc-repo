@@ -26,7 +26,7 @@ except ImportError:
 
 
 class ClaudeDocsDownloader:
-    def __init__(self, output_dir: str = "docs"):
+    def __init__(self, output_dir: str = "../../docs/claude"):
         self.output_dir = Path(output_dir)
         self.base_url = "https://docs.claude.com"
         self.sitemap_url = f"{self.base_url}/sitemap.xml"
@@ -139,8 +139,9 @@ class ClaudeDocsDownloader:
         sitemap_content = self.download_sitemap()
         urls = self.extract_urls_from_sitemap(sitemap_content)
 
-        # Save the sitemap itself
-        sitemap_path = self.output_dir.parent / "sitemap_cache.xml"
+        # Save the sitemap itself (in same directory as script)
+        script_dir = Path(__file__).parent
+        sitemap_path = script_dir / "sitemap_cache.xml"
         with open(sitemap_path, 'w', encoding='utf-8') as f:
             f.write(sitemap_content)
         print(f"\n✓ Saved sitemap cache to: {sitemap_path}")
@@ -192,7 +193,7 @@ class ClaudeDocsDownloader:
 
 def main():
     """Main entry point."""
-    downloader = ClaudeDocsDownloader(output_dir="docs")
+    downloader = ClaudeDocsDownloader(output_dir="../../docs/claude")
     downloader.download_all()
 
 

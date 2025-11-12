@@ -7,8 +7,8 @@ on:
       - main
     paths:
       # Only trigger when documentation changes
-      - 'claude/docs/**'
-      - 'reddit/*.md'
+      - 'docs/claude/**'
+      - 'docs/reddit/*.md'
       - 'vector_search/**'
   workflow_dispatch:
     inputs:
@@ -45,7 +45,7 @@ jobs:
         id: detect-changes
         run: |
           # Check if docs changed in this push (compare with previous commit)
-          if git diff --name-only HEAD~1 HEAD | grep -qE '^(claude/docs/|reddit/.*\.md)'; then
+          if git diff --name-only HEAD~1 HEAD | grep -qE '^(docs/claude/|docs/reddit/.*\.md)'; then
             echo "docs_changed=true" >> $GITHUB_OUTPUT
             echo "📚 Documentation changes detected"
           else
@@ -160,7 +160,7 @@ jobs:
 # 3. Add GitHub secret: GOOGLE_API_KEY (get from https://aistudio.google.com/apikey)
 #
 # Deployment Behavior:
-# - Triggers automatically when docs change in claude/docs/** or reddit/*.md
+# - Triggers automatically when docs change in docs/claude/** or docs/reddit/*.md
 # - Can be manually triggered with optional force re-index
 # - Only re-indexes when documentation actually changes (saves time and API calls)
 # - Uses Docker for containerization (no bare metal installation)
