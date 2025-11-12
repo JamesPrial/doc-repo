@@ -267,8 +267,8 @@ def main():
     print("\nInitializing Document Processor...")
     processor = MarkdownDocumentProcessor(target_chunk_size=1024)
 
-    # Get repository root
-    repo_root = Path(__file__).parent.parent
+    # Get repository root (Docker: /app, Local: repo root)
+    repo_root = Path(__file__).parent
 
     # Process Claude documentation
     claude_dir = repo_root / "docs" / "claude"
