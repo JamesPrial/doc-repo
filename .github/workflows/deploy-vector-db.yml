@@ -82,7 +82,17 @@ jobs:
             echo "⚠️  ChromaDB collection does not exist - will trigger indexing"
           fi
 
-      # Step 5: Re-index documents (if docs changed, forced, or collection missing)
+      # Step 5: Prepare ChromaDB directory with correct permissions
+      - name: Prepare ChromaDB directory
+        working-directory: vector_search
+        run: |
+          echo "🔧 Ensuring chroma_db directory exists with correct permissions..."
+          mkdir -p chroma_db
+          chmod 755 chroma_db
+          ls -la chroma_db
+          echo "✅ ChromaDB directory prepared"
+
+      # Step 6: Re-index documents (if docs changed, forced, or collection missing)
       - name: Re-index documentation
         working-directory: vector_search
         if: steps.detect-changes.outputs.docs_changed == 'true' || github.event.inputs.force_reindex == 'true' || steps.check-collection.outputs.collection_exists == 'false'
@@ -107,7 +117,7 @@ jobs:
 
           echo "✅ Indexing completed"
 
-      # Step 6: Build and deploy Docker container
+      # Step 7: Build and deploy Docker container
       - name: Deploy vector search service
         working-directory: vector_search
         run: |
@@ -132,7 +142,7 @@ jobs:
 
           echo "✅ Container deployed"
 
-      # Step 7: Wait for service to be healthy
+      # Step 8: Wait for service to be healthy
       - name: Wait for service health check
         working-directory: vector_search
         run: |
@@ -152,7 +162,7 @@ jobs:
           docker compose logs
           exit 1
 
-      # Step 8: Verify deployment
+      # Step 9: Verify deployment
       - name: Verify deployment
         working-directory: vector_search
         run: |
@@ -168,7 +178,7 @@ jobs:
 
           echo "✅ Deployment verified successfully"
 
-      # Step 9: Display deployment summary
+      # Step 10: Display deployment summary
       - name: Deployment summary
         if: always()
         working-directory: vector_search

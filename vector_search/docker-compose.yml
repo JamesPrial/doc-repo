@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   vector-search-api:
     build:
@@ -17,8 +15,8 @@ services:
       # Persist ChromaDB data
       - ./chroma_db:/app/chroma_db
       # Mount documentation directories (read-only)
-      - ../claude/docs:/app/claude/docs:ro
-      - ../reddit:/app/reddit:ro
+      - ../docs/claude:/app/claude/docs:ro
+      - ../docs/reddit:/app/reddit:ro
     environment:
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
     healthcheck:
