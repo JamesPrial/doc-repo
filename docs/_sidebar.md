@@ -1,6 +1,7 @@
 <!-- _sidebar.md -->
 
 - [Home](/)
+- [📋 Changelog](../CHANGELOG.md)
 
 - **Getting Started**
   - [Introduction](../claude/docs/intro.md)
@@ -67,6 +68,9 @@
 
 - **Reddit API**
   - [Reddit API Documentation](../reddit/reddit-api.md)
+
+- **nodriver**
+  - [nodriver Documentation](../nodriver/index.md)
 
 ---
 

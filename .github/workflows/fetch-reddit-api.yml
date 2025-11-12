@@ -40,9 +40,23 @@ jobs:
         run: |
           rm scripts/reddit/reddit-api.html
 
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code || echo "has_changes=true" >> $GITHUB_OUTPUT
+
+      - name: Generate changelog entry
+        if: steps.git-check.outputs.has_changes == 'true'
+        run: |
+          python scripts/generate_changelog.py --source reddit --date $(date -u '+%Y-%m-%d')
+
       - name: Commit and push if changed
+        if: steps.git-check.outputs.has_changes == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/reddit/reddit-api.md
-          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: update Reddit API documentation (markdown)" && git push)
+          git add docs/reddit/reddit-api.md CHANGELOG.md
+          git commit -m "docs: update Reddit API documentation ($(date -u '+%Y-%m-%d'))
+
+          See CHANGELOG.md for details"
+          git push

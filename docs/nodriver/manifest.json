@@ -1,0 +1,376 @@
+{
+  "files": [
+    {
+      "source_path": "index",
+      "output_path": "nodriver/index.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/index.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp",
+      "output_path": "nodriver/nodriver/cdp.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/accessibility",
+      "output_path": "nodriver/nodriver/cdp/accessibility.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/accessibility.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/animation",
+      "output_path": "nodriver/nodriver/cdp/animation.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/animation.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/audits",
+      "output_path": "nodriver/nodriver/cdp/audits.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/audits.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/autofill",
+      "output_path": "nodriver/nodriver/cdp/autofill.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/autofill.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/background_service",
+      "output_path": "nodriver/nodriver/cdp/background_service.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/background_service.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/bluetooth_emulation",
+      "output_path": "nodriver/nodriver/cdp/bluetooth_emulation.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/bluetooth_emulation.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/browser",
+      "output_path": "nodriver/nodriver/cdp/browser.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/browser.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/cache_storage",
+      "output_path": "nodriver/nodriver/cdp/cache_storage.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/cache_storage.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/cast",
+      "output_path": "nodriver/nodriver/cdp/cast.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/cast.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/console",
+      "output_path": "nodriver/nodriver/cdp/console.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/console.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/css",
+      "output_path": "nodriver/nodriver/cdp/css.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/css.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/debugger",
+      "output_path": "nodriver/nodriver/cdp/debugger.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/debugger.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/device_access",
+      "output_path": "nodriver/nodriver/cdp/device_access.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/device_access.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/device_orientation",
+      "output_path": "nodriver/nodriver/cdp/device_orientation.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/device_orientation.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/dom",
+      "output_path": "nodriver/nodriver/cdp/dom.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/dom.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/dom_debugger",
+      "output_path": "nodriver/nodriver/cdp/dom_debugger.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/dom_debugger.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/dom_snapshot",
+      "output_path": "nodriver/nodriver/cdp/dom_snapshot.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/dom_snapshot.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/dom_storage",
+      "output_path": "nodriver/nodriver/cdp/dom_storage.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/dom_storage.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/emulation",
+      "output_path": "nodriver/nodriver/cdp/emulation.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/emulation.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/event_breakpoints",
+      "output_path": "nodriver/nodriver/cdp/event_breakpoints.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/event_breakpoints.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/extensions",
+      "output_path": "nodriver/nodriver/cdp/extensions.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/extensions.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/fed_cm",
+      "output_path": "nodriver/nodriver/cdp/fed_cm.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/fed_cm.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/fetch",
+      "output_path": "nodriver/nodriver/cdp/fetch.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/fetch.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/file_system",
+      "output_path": "nodriver/nodriver/cdp/file_system.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/file_system.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/headless_experimental",
+      "output_path": "nodriver/nodriver/cdp/headless_experimental.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/headless_experimental.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/heap_profiler",
+      "output_path": "nodriver/nodriver/cdp/heap_profiler.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/heap_profiler.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/indexed_db",
+      "output_path": "nodriver/nodriver/cdp/indexed_db.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/indexed_db.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/input_",
+      "output_path": "nodriver/nodriver/cdp/input_.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/input_.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/inspector",
+      "output_path": "nodriver/nodriver/cdp/inspector.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/inspector.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/io",
+      "output_path": "nodriver/nodriver/cdp/io.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/io.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/layer_tree",
+      "output_path": "nodriver/nodriver/cdp/layer_tree.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/layer_tree.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/log",
+      "output_path": "nodriver/nodriver/cdp/log.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/log.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/media",
+      "output_path": "nodriver/nodriver/cdp/media.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/media.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/memory",
+      "output_path": "nodriver/nodriver/cdp/memory.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/memory.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/network",
+      "output_path": "nodriver/nodriver/cdp/network.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/network.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/overlay",
+      "output_path": "nodriver/nodriver/cdp/overlay.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/overlay.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/page",
+      "output_path": "nodriver/nodriver/cdp/page.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/page.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/performance",
+      "output_path": "nodriver/nodriver/cdp/performance.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/performance.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/performance_timeline",
+      "output_path": "nodriver/nodriver/cdp/performance_timeline.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/performance_timeline.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/preload",
+      "output_path": "nodriver/nodriver/cdp/preload.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/preload.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/profiler",
+      "output_path": "nodriver/nodriver/cdp/profiler.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/profiler.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/pwa",
+      "output_path": "nodriver/nodriver/cdp/pwa.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/pwa.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/runtime",
+      "output_path": "nodriver/nodriver/cdp/runtime.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/runtime.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/schema",
+      "output_path": "nodriver/nodriver/cdp/schema.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/schema.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/security",
+      "output_path": "nodriver/nodriver/cdp/security.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/security.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/service_worker",
+      "output_path": "nodriver/nodriver/cdp/service_worker.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/service_worker.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/storage",
+      "output_path": "nodriver/nodriver/cdp/storage.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/storage.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/system_info",
+      "output_path": "nodriver/nodriver/cdp/system_info.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/system_info.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/target",
+      "output_path": "nodriver/nodriver/cdp/target.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/target.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/tethering",
+      "output_path": "nodriver/nodriver/cdp/tethering.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/tethering.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/tracing",
+      "output_path": "nodriver/nodriver/cdp/tracing.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/tracing.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/web_audio",
+      "output_path": "nodriver/nodriver/cdp/web_audio.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/web_audio.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/cdp/web_authn",
+      "output_path": "nodriver/nodriver/cdp/web_authn.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/cdp/web_authn.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/classes/browser",
+      "output_path": "nodriver/nodriver/classes/browser.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/classes/browser.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/classes/element",
+      "output_path": "nodriver/nodriver/classes/element.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/classes/element.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/classes/others_and_helpers",
+      "output_path": "nodriver/nodriver/classes/others_and_helpers.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/classes/others_and_helpers.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/classes/tab",
+      "output_path": "nodriver/nodriver/classes/tab.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/classes/tab.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "nodriver/quickstart",
+      "output_path": "nodriver/nodriver/quickstart.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/nodriver/quickstart.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "readme",
+      "output_path": "nodriver/readme.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/readme.rst.txt",
+      "format": "markdown"
+    },
+    {
+      "source_path": "style",
+      "output_path": "nodriver/style.md",
+      "source_url": "https://ultrafunkamsterdam.github.io/nodriver/_sources/style.rst.txt",
+      "format": "markdown"
+    }
+  ]
+}

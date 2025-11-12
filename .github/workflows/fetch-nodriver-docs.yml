@@ -1,4 +1,4 @@
-name: Update Claude Documentation
+name: Update nodriver Documentation
 
 on:
   # Run daily at 2 AM UTC
@@ -30,11 +30,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r scripts/claude/requirements.txt
+          pip install -r scripts/nodriver/requirements.txt
 
       - name: Run documentation downloader
         run: |
-          python scripts/claude/download_docs.py
+          python scripts/nodriver/download_docs.py
 
       - name: Check for changes
         id: git-check
@@ -44,15 +44,15 @@ jobs:
       - name: Generate changelog entry
         if: steps.git-check.outputs.has_changes == 'true'
         run: |
-          python scripts/generate_changelog.py --source claude --date $(date -u '+%Y-%m-%d')
+          python scripts/generate_changelog.py --source nodriver --date $(date -u '+%Y-%m-%d')
 
       - name: Commit and push changes
         if: steps.git-check.outputs.has_changes == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/claude/ scripts/claude/sitemap_cache.xml CHANGELOG.md
-          git commit -m "docs: update Claude documentation ($(date -u '+%Y-%m-%d'))
+          git add docs/nodriver/ CHANGELOG.md
+          git commit -m "docs: update nodriver documentation ($(date -u '+%Y-%m-%d'))
 
           See CHANGELOG.md for details"
           git push
@@ -60,6 +60,6 @@ jobs:
       - name: Upload manifest as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: docs-manifest
-          path: docs/claude/manifest.json
+          name: nodriver-docs-manifest
+          path: docs/nodriver/manifest.json
           retention-days: 30
