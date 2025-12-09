@@ -1229,7 +1229,6 @@ Cast a vote on a thing.
 dir| vote direction. one of (1, 0, -1)  
 ---|---  
 id| fullname of a thing  
-rank| an integer greater than 1  
 uh / X-Modhash header| a modhash  
   
 ## listings
@@ -3945,4 +3944,4 @@ REDDIT and the ALIEN Logo are registered trademarks of reddit inc.
 
 ![](//reddit.com/static/pixel.png)
 
-π Rendered by PID 167171 on reddit-service-r2-loggedout-canary-6cb8b5858f-bh7db at 2025-12-08 03:18:25.110100+00:00 running 1e2c602 country code: US.
+π Rendered by PID 391199 on reddit-service-r2-loggedout-6bdc658d95-86tv5 at 2025-12-09 03:15:22.158732+00:00 running 319f097 country code: US.
