@@ -2022,7 +2022,7 @@ Marks all conversations read for a particular conversation state within the pass
 
 entity| comma-delimited list of subreddit names  
 ---|---  
-state| one of (`all`, `appeals`, `notifications`, `inbox`, `filtered`, `inprogress`, `mod`, `archived`, `default`, `highlighted`, `join_requests`, `new`)  
+state| one of (`all`, `appeals`, `notifications`, `inbox`, `filtered`, `inprogress`, `mod`, `archived`, `default`, `highlighted`, `admin`, `join_requests`, `new`)  
   
 #
 
@@ -2035,7 +2035,7 @@ after| A Modmail Conversation ID, in the form ModmailConversation_<id>
 entity| comma-delimited list of subreddit names  
 limit| an integer between 1 and 100 (default: 25)  
 sort| one of (`recent`, `mod`, `user`, `unread`)  
-state| one of (`all`, `appeals`, `notifications`, `inbox`, `filtered`, `inprogress`, `mod`, `archived`, `default`, `highlighted`, `join_requests`, `new`)  
+state| one of (`all`, `appeals`, `notifications`, `inbox`, `filtered`, `inprogress`, `mod`, `archived`, `default`, `highlighted`, `admin`, `join_requests`, `new`)  
   
 #
 
@@ -3944,4 +3944,4 @@ REDDIT and the ALIEN Logo are registered trademarks of reddit inc.
 
 ![](//reddit.com/static/pixel.png)
 
-π Rendered by PID 175627 on reddit-service-r2-loggedout-6bdc658d95-b9zts at 2025-12-11 03:21:14.823801+00:00 running 319f097 country code: US.
+π Rendered by PID 78 on reddit-service-r2-loggedout-587b68998b-ks9c5 at 2025-12-12 03:19:42.287485+00:00 running dc57d4b country code: US.

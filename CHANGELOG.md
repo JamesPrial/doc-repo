@@ -36,6 +36,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
 
+
+## [2025-12-12] - Reddit API Documentation
+
+### Changed
+- `docs/reddit/reddit-api.md` (+3, -3)
+
+**Total**: 1 file changed, +3 additions, -3 deletions
+
+
 ## [2025-12-11] - Reddit API Documentation
 
 ### Changed
