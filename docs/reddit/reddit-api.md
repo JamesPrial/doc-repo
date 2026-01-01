@@ -3938,10 +3938,10 @@ v2| a wiki revision ID
 
 
 
-Use of this site constitutes acceptance of our [User Agreement](https://www.reddit.com/help/useragreement) and [Privacy Policy](https://www.reddit.com/help/privacypolicy). © 2025 reddit inc. All rights reserved.
+Use of this site constitutes acceptance of our [User Agreement](https://www.reddit.com/help/useragreement) and [Privacy Policy](https://www.reddit.com/help/privacypolicy). © 2026 reddit inc. All rights reserved.
 
 REDDIT and the ALIEN Logo are registered trademarks of reddit inc.
 
 ![](//reddit.com/static/pixel.png)
 
-π Rendered by PID 59 on reddit-service-r2-loggedout-8459d6c4bd-l2qdc at 2025-12-31 03:23:30.593612+00:00 running 67c643d country code: US.
+π Rendered by PID 855406 on reddit-service-r2-loggedout-8459d6c4bd-tv9wj at 2026-01-01 03:46:26.833173+00:00 running 67c643d country code: US.
